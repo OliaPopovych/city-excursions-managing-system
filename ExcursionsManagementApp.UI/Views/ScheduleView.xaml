@@ -1,0 +1,35 @@
+﻿<UserControl x:Class="ExcursionsManagementApp.UI.Views.ScheduleView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ExcursionsManagementApp.UI.Views"
+             mc:Ignorable="d" Height="297.905" Width="553.254" 
+             >
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.3*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <DatePicker HorizontalAlignment="Left" Margin="98,39,0,0" VerticalAlignment="Top">
+            <DatePicker.Resources>
+                <Style TargetType="DatePickerTextBox">
+                    <Setter Property="Text" Value="View by Date"/>
+                </Style>
+            </DatePicker.Resources>
+        </DatePicker>
+        <StackPanel Grid.Column="0" Grid.Row="1">
+            <DataGrid x:Name="dataGrid" HorizontalAlignment="Stretch" 
+                      VerticalAlignment="Stretch" Focusable="True" Height="209" Margin="22,0,0,0" AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Excursions"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
+    </Grid>
+</UserControl>
