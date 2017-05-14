@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ExcursionsManagementApp.Properties
+namespace ExcursionsManagementApp.UI.Properties
 {
 
 

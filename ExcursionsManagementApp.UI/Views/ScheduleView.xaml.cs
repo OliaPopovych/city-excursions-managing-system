@@ -13,16 +13,18 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ExcursionsManagementApp
+namespace ExcursionsManagementApp.UI.Views
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для ScheduleView.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ScheduleView : UserControl
     {
-        public MainWindow()
+        public ScheduleView()
         {
             InitializeComponent();
+            this.Height = (SystemParameters.PrimaryScreenHeight * 0.75);
+            this.Width = (SystemParameters.PrimaryScreenWidth * 0.75);
         }
     }
 }
