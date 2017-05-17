@@ -1,4 +1,4 @@
-﻿using ExcursionsManagementApp.DomainModel;
+﻿using ExcursionsManagementApp.DomainModel.Entities;
 
 /// <summary>
 /// This interfaces and clases are created in case any additional
@@ -19,6 +19,9 @@ namespace ExcursionsManagementApp.DAL
     {
     }
     public interface ITourRepository : IGenericDataRepository<Tour>
+    {
+    }
+    public interface IUserRepository : IGenericDataRepository<User>
     {
     }
 

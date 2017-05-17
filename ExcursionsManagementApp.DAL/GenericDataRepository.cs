@@ -13,7 +13,7 @@ namespace ExcursionsManagementApp.DAL
         {
             List<T> list;
             // for short living contexts its better to use eager loading
-            using (var context = new Entities())
+            using (var context = new ExcurDbContext())
             {
                 // To implement LINQ-providers to external 
                 // data let's use the interface IQueryable <T>
@@ -36,7 +36,7 @@ namespace ExcursionsManagementApp.DAL
             params Expression<Func<T, object>>[] navigationProperties)
         {
             List<T> list;
-            using(var context = new Entities())
+            using(var context = new ExcurDbContext())
             {
                 IQueryable<T> dbQuery = context.Set<T>();
 
@@ -57,7 +57,7 @@ namespace ExcursionsManagementApp.DAL
         {
             T item = null;
 
-            using(var context = new Entities())
+            using(var context = new ExcurDbContext())
             {
                 IQueryable<T> dbQuery = context.Set<T>();
 
@@ -74,7 +74,7 @@ namespace ExcursionsManagementApp.DAL
 
         public virtual void Add(params T[] items)
         {
-            using(var context = new Entities())
+            using(var context = new ExcurDbContext())
             {
                 foreach(var item in items)
                 {
@@ -86,7 +86,7 @@ namespace ExcursionsManagementApp.DAL
 
         public virtual void Update(params T[] items)
         {
-            using (var context = new Entities())
+            using (var context = new ExcurDbContext())
             {
                 foreach(var item in items)
                 {
@@ -97,7 +97,7 @@ namespace ExcursionsManagementApp.DAL
 
         public virtual void Remove(params T[] items)
         {
-            using(var context = new Entities())
+            using(var context = new ExcurDbContext())
             {
                 foreach(var item in items)
                 {

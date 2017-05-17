@@ -14,7 +14,6 @@ namespace ExcursionsManagementApp.DomainModel.Migrations
                         CustomerID = c.Int(nullable: false, identity: true),
                         FirstName = c.String(nullable: false, maxLength: 30),
                         LastName = c.String(nullable: false, maxLength: 30),
-                        ScheduleID = c.Int(nullable: false),
                         Schedule_ScheduleEntryID = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.CustomerID)

@@ -2,9 +2,9 @@ namespace ExcursionsManagementApp.DomainModel
 {
     using System.Data.Entity;
 
-    public partial class Entities : DbContext
+    public partial class ExcurDbContext : DbContext
     {
-        public Entities()
+        public ExcurDbContext()
             : base("DataBase")
         {
             Configuration.LazyLoadingEnabled = false;

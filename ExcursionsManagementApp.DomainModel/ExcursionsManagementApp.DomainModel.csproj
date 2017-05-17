@@ -51,18 +51,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Customer.cs" />
-    <Compile Include="Guide.cs" />
-    <Compile Include="Entities.cs" />
+    <Compile Include="Context\DBInitializer.cs" />
+    <Compile Include="Entities\Customer.cs" />
+    <Compile Include="Entities\Guide.cs" />
+    <Compile Include="Context\ExcurDbContext.cs" />
+    <Compile Include="Entities\User.cs" />
     <Compile Include="Migrations\201705141433265_InitialCreate.cs" />
     <Compile Include="Migrations\201705141433265_InitialCreate.Designer.cs">
       <DependentUpon>201705141433265_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Place.cs" />
-    <Compile Include="ScheduleEntry.cs" />
+    <Compile Include="Entities\Place.cs" />
+    <Compile Include="Entities\ScheduleEntry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Tour.cs" />
+    <Compile Include="Entities\Tour.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

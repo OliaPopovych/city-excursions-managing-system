@@ -16,7 +16,6 @@ namespace ExcursionsManagementApp.DomainModel
         // PK
         public int ScheduleEntryID { get; set; }
 
-        [Required]
         [StringLength(50)]
         public string TourName { get; set; }
 

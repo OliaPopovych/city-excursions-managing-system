@@ -16,8 +16,8 @@ namespace ExcursionsManagementApp.DomainModel
         public string LastName { get; set; }
 
         // FKs
-        public int ScheduleID { get; set; }
+        public int ScheduleEntryID { get; set; }
         [Required]
-        public virtual ScheduleEntry Schedule { get; set; }
+        public virtual ScheduleEntry ScheduleEntry { get; set; }
     }
 }
