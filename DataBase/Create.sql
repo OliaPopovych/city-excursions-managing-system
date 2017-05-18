@@ -4,19 +4,29 @@ GO
 USE ExcursionsDB
 GO
 
+CREATE TABLE [dbo].[Users] (
+    [UserID] [int] NOT NULL IDENTITY,
+    [FirstName] [nvarchar](50) NOT NULL,
+    [LastName] [nvarchar](50) NOT NULL,
+    [Login] [nvarchar](20) NOT NULL,
+    [Password] [nvarchar](50) NOT NULL,
+    [IsDisable] [bit] NOT NULL,
+    CONSTRAINT [PK_dbo.Users] PRIMARY KEY ([UserID])
+)
+GO
+
 CREATE TABLE [dbo].[Customers] (
     [CustomerID] [int] NOT NULL IDENTITY,
     [FirstName] [nvarchar](30) NOT NULL,
     [LastName] [nvarchar](30) NOT NULL,
-    [ScheduleID] [int] NOT NULL,
-    [Schedule_ScheduleEntryID] [int] NOT NULL,
+    [ScheduleEntryID] [int] NOT NULL,
     CONSTRAINT [PK_dbo.Customers] PRIMARY KEY ([CustomerID])
 )
 GO 
 
 CREATE TABLE [dbo].[Schedule] (
     [ScheduleEntryID] [int] NOT NULL IDENTITY,
-    [TourName] [nvarchar](50) NOT NULL,
+    [TourName] [nvarchar](50),
     [StartTime] [datetime] NOT NULL,
     [TourID] [int] NOT NULL,
     CONSTRAINT [PK_dbo.Schedule] PRIMARY KEY ([ScheduleEntryID])
@@ -56,7 +66,7 @@ GO
 
 ALTER TABLE [dbo].[Customers] 
 ADD CONSTRAINT [FK_dbo.Customers_dbo.Schedule_Schedule_ScheduleEntryID] 
-FOREIGN KEY ([Schedule_ScheduleEntryID]) REFERENCES [dbo].[Schedule] ([ScheduleEntryID]) 
+FOREIGN KEY ([ScheduleEntryID]) REFERENCES [dbo].[Schedule] ([ScheduleEntryID]) 
 ON DELETE CASCADE
 GO
 

@@ -5,14 +5,14 @@ namespace ExcursionsManagementApp.DomainModel.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<ExcursionsManagementApp.DomainModel.Entities>
+    internal sealed class Configuration : DbMigrationsConfiguration<ExcursionsManagementApp.DomainModel.ExcurDbContext>
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = true;
+            AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(ExcursionsManagementApp.DomainModel.Entities context)
+        protected override void Seed(ExcursionsManagementApp.DomainModel.ExcurDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 

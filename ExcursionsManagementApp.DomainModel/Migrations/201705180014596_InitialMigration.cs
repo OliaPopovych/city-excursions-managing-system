@@ -3,7 +3,7 @@ namespace ExcursionsManagementApp.DomainModel.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialCreate : DbMigration
+    public partial class InitialMigration : DbMigration
     {
         public override void Up()
         {
@@ -14,19 +14,18 @@ namespace ExcursionsManagementApp.DomainModel.Migrations
                         CustomerID = c.Int(nullable: false, identity: true),
                         FirstName = c.String(nullable: false, maxLength: 30),
                         LastName = c.String(nullable: false, maxLength: 30),
-                        ScheduleID = c.Int(nullable: false),
-                        Schedule_ScheduleEntryID = c.Int(nullable: false),
+                        ScheduleEntryID = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.CustomerID)
-                .ForeignKey("dbo.Schedule", t => t.Schedule_ScheduleEntryID, cascadeDelete: true)
-                .Index(t => t.Schedule_ScheduleEntryID);
+                .ForeignKey("dbo.Schedule", t => t.ScheduleEntryID, cascadeDelete: true)
+                .Index(t => t.ScheduleEntryID);
             
             CreateTable(
                 "dbo.Schedule",
                 c => new
                     {
                         ScheduleEntryID = c.Int(nullable: false, identity: true),
-                        TourName = c.String(nullable: false, maxLength: 50),
+                        TourName = c.String(maxLength: 50),
                         StartTime = c.DateTime(nullable: false),
                         TourID = c.Int(nullable: false),
                     })
@@ -67,6 +66,19 @@ namespace ExcursionsManagementApp.DomainModel.Migrations
                 .PrimaryKey(t => t.PlaceID);
             
             CreateTable(
+                "dbo.Users",
+                c => new
+                    {
+                        UserID = c.Int(nullable: false, identity: true),
+                        FirstName = c.String(nullable: false, maxLength: 50),
+                        LastName = c.String(nullable: false, maxLength: 50),
+                        Login = c.String(nullable: false, maxLength: 20),
+                        Password = c.String(nullable: false, maxLength: 50),
+                        IsDisable = c.Boolean(nullable: false),
+                    })
+                .PrimaryKey(t => t.UserID);
+            
+            CreateTable(
                 "dbo.PlaceTours",
                 c => new
                     {
@@ -83,17 +95,18 @@ namespace ExcursionsManagementApp.DomainModel.Migrations
         
         public override void Down()
         {
-            DropForeignKey("dbo.Customers", "Schedule_ScheduleEntryID", "dbo.Schedule");
+            DropForeignKey("dbo.Customers", "ScheduleEntryID", "dbo.Schedule");
             DropForeignKey("dbo.Schedule", "TourID", "dbo.Tours");
             DropForeignKey("dbo.PlaceTours", "Tour_TourID", "dbo.Tours");
             DropForeignKey("dbo.PlaceTours", "Place_PlaceID", "dbo.Places");
             DropForeignKey("dbo.Tours", "GuideID", "dbo.Guides");
-            DropIndex("dbo.Customers", new[] { "Schedule_ScheduleEntryID" });
+            DropIndex("dbo.Customers", new[] { "ScheduleEntryID" });
             DropIndex("dbo.Schedule", new[] { "TourID" });
             DropIndex("dbo.PlaceTours", new[] { "Tour_TourID" });
             DropIndex("dbo.PlaceTours", new[] { "Place_PlaceID" });
             DropIndex("dbo.Tours", new[] { "GuideID" });
             DropTable("dbo.PlaceTours");
+            DropTable("dbo.Users");
             DropTable("dbo.Places");
             DropTable("dbo.Guides");
             DropTable("dbo.Tours");

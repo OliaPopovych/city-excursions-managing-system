@@ -5,8 +5,47 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ExcursionsManagementApp.UI.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="500" d:DesignWidth="600">
+
+
+
     <Grid>
-            
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.15*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.8*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Row="1" Margin="1,0,10,67" Grid.Column="1">
+            <DataGrid x:Name="dataGrid" 
+                       Focusable="True"  Margin="43,0,20,82" AutoGenerateColumns="False" Height="288">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Excursions"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
+
+        <Border Grid.Column="0" Grid.Row="1"  BorderBrush="LightSkyBlue" BorderThickness="1" Margin="30,0,0,82">
+            <StackPanel Orientation="Vertical" Margin="9,0,0,17">
+                <Expander Margin="5,2.5,5,2.5" Foreground="Black" Header="Add new customer" IsExpanded="True" Height="240">
+                    <StackPanel Height="241">
+                        <ComboBox Name="comboBoxSchedule" Margin="0,5,0,15"/>
+                        <Label x:Name="label" Content="First Name" Height="26"/>
+                        <TextBox Name="textBoxFName" Margin="0,5,0,5" Height="28"/>
+                        <Label x:Name="label1" Content="Last Name"/>
+                        <TextBox Name="textBoxSName" Margin="0,7,0,7" Height="28"/>
+                        <Button x:Name="buttonAdd" Content="Add" HorizontalAlignment="Center" VerticalAlignment="Top" Width="75" />
+                    </StackPanel>
+                </Expander>
+            </StackPanel>
+        </Border>
+        <Button x:Name="buttonRemove" Content="Remove" HorizontalAlignment="Left" Margin="47,24,0,0" VerticalAlignment="Top" Width="76" Grid.Column="1"/>
+        <ComboBox x:Name="comboBoxFind" Grid.Column="1" HorizontalAlignment="Left" Margin="169,24,0,0" VerticalAlignment="Top" Width="120"/>
+
+
+
     </Grid>
 </UserControl>

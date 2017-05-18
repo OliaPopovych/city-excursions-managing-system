@@ -55,10 +55,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ExcursionsManagementApp.BL\ExcursionsManagementApp.BL.csproj">
-      <Project>{aa876d24-fc8c-41b2-b3ca-9d6a46e043bb}</Project>
-      <Name>ExcursionsManagementApp.BL</Name>
-    </ProjectReference>
     <ProjectReference Include="..\ExcursionsManagementApp.DomainModel\ExcursionsManagementApp.DomainModel.csproj">
       <Project>{78345989-3bb2-4d84-9e94-71c58e6724cf}</Project>
       <Name>ExcursionsManagementApp.DomainModel</Name>
