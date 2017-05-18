@@ -1,4 +1,5 @@
-﻿using ExcursionsManagementApp.DomainModel.Entities;
+﻿using ExcursionsManagementApp.DomainModel;
+using ExcursionsManagementApp.DomainModel.Entities;
 
 /// <summary>
 /// This interfaces and clases are created in case any additional
@@ -25,19 +26,22 @@ namespace ExcursionsManagementApp.DAL
     {
     }
 
-    public class CustomerRepositories : GenericDataRepository<Customer>, ICustomerRepository
+    public class CustomerRepository : GenericDataRepository<Customer>, ICustomerRepository
     {
     }
-    public class GuideRepositories : GenericDataRepository<Guide>, IGuideRepository
+    public class GuideRepository : GenericDataRepository<Guide>, IGuideRepository
     {
     }
-    public class PlaceRepositories : GenericDataRepository<Place>, IPlaceRepository
+    public class PlaceRepository : GenericDataRepository<Place>, IPlaceRepository
     {
     }
-    public class ShEntryRepositories : GenericDataRepository<ScheduleEntry>, IShEntryRepository
+    public class ShEntryRepository : GenericDataRepository<ScheduleEntry>, IShEntryRepository
     {
     }
-    public class TourRepositories : GenericDataRepository<Tour>, ITourRepository
+    public class TourRepository : GenericDataRepository<Tour>, ITourRepository
+    {
+    }
+    public class UserRepository : GenericDataRepository<User>, IUserRepository
     {
     }
 }

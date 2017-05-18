@@ -1,4 +1,8 @@
-﻿using System.Windows;
+﻿using ExcursionsManagementApp.DomainModel.Entities;
+using System.Security.Cryptography;
+using System.Text;
+using System.Windows;
+using ExcursionsManagementApp.BL;
 
 namespace ExcursionsManagementApp.UI
 {
@@ -10,8 +14,40 @@ namespace ExcursionsManagementApp.UI
         public LoginWindow()
         {
             InitializeComponent();
-            Height = SystemParameters.PrimaryScreenHeight * 0.25;
-            Width = SystemParameters.PrimaryScreenWidth * 0.35;
+            
+        }
+
+        private void buttonLogin_Click(object sender, RoutedEventArgs e)
+        {
+            IBusinessLayer businessLayer = new BusinessLayer();
+
+            var login = textBoxLogin.Text;
+
+            MD5 md5 = new MD5CryptoServiceProvider();
+            md5.ComputeHash(Encoding.UTF8.GetBytes(textBoxPassword.Text));
+
+            byte[] hash = md5.Hash;
+
+            StringBuilder password = new StringBuilder();
+            for(int i = 0; i < hash.Length; i++)
+            {
+                password.Append(hash[i].ToString("x2"));
+            }
+            //textBoxLogin.Text = password.ToString();
+
+            User user = businessLayer.GetUserByLoginAndPassword(login, password.ToString());
+
+            if (user == null)
+            {
+                MessageBox.Show(this, "Invalid user name or password", "Authentication Error");
+            }
+            else
+            {
+                //CurrentUser.Initialize(user);
+                MainWindow mW = new MainWindow();
+                mW.Show();
+                this.Close();
+            }
         }
     }
 }

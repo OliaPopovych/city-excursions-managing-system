@@ -4,6 +4,17 @@ GO
 USE ExcursionsDB
 GO
 
+CREATE TABLE [dbo].[Users] (
+    [UserID] [int] NOT NULL IDENTITY,
+    [FirstName] [nvarchar](50) NOT NULL,
+    [LastName] [nvarchar](50) NOT NULL,
+    [Login] [nvarchar](20) NOT NULL,
+    [Password] [nvarchar](50) NOT NULL,
+    [IsDisable] [bit] NOT NULL,
+    CONSTRAINT [PK_dbo.Users] PRIMARY KEY ([UserID])
+)
+GO
+
 CREATE TABLE [dbo].[Customers] (
     [CustomerID] [int] NOT NULL IDENTITY,
     [FirstName] [nvarchar](30) NOT NULL,

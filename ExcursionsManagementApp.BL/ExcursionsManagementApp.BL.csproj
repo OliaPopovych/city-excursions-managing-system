@@ -40,17 +40,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BusinessLayer.cs" />
     <Compile Include="IBusinessLayer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ExcursionsManagementApp.DAL\ExcursionsManagementApp.DAL.csproj">
+      <Project>{b9cd5cd2-d221-484e-af12-8bf7ad3c4703}</Project>
+      <Name>ExcursionsManagementApp.DAL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ExcursionsManagementApp.DomainModel\ExcursionsManagementApp.DomainModel.csproj">
       <Project>{78345989-3bb2-4d84-9e94-71c58e6724cf}</Project>
       <Name>ExcursionsManagementApp.DomainModel</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ExcursionsManagementApp.UI\ExcursionsManagementApp.UI.csproj">
-      <Project>{dabd1608-d924-4cfd-94af-b7749b493aad}</Project>
-      <Name>ExcursionsManagementApp.UI</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

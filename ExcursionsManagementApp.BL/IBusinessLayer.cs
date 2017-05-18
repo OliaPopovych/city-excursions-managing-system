@@ -1,4 +1,5 @@
 ﻿using ExcursionsManagementApp.DomainModel;
+using ExcursionsManagementApp.DomainModel.Entities;
 using System.Collections.Generic;
 
 namespace ExcursionsManagementApp.BL
@@ -28,6 +29,8 @@ namespace ExcursionsManagementApp.BL
         Customer GetCustomerByName();
         void AddCustomer();
         void RemoveCustomer();
+
+        User GetUserByLoginAndPassword(string login, string password);
 
     }
 }

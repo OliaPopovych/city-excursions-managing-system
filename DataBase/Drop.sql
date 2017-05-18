@@ -40,3 +40,6 @@ GO
 DROP TABLE [dbo].[PlaceTours]
 GO
 
+DROP TABLE [dbo].[Users]
+GO
+

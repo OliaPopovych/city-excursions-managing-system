@@ -34,3 +34,8 @@ INSERT INTO [dbo].[PlaceTours]([Place_PlaceID], [Tour_TourID])
 VALUES (1, 1),
 	   (2, 1)
 SET IDENTITY_INSERT [dbo].[Places] OFF
+
+SET IDENTITY_INSERT [dbo].[Users] ON
+INSERT INTO [dbo].[Users]([UserID],[FirstName],[LastName],[Login],[Password],[IsDisable])
+VALUES (1, 'olia', 'p', 'olia', '202cb962ac59075b964b07152d234b70', 0)
+SET IDENTITY_INSERT [dbo].[Users] OFF
