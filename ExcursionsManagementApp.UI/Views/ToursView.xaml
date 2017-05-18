@@ -5,8 +5,47 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ExcursionsManagementApp.UI.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="500" d:DesignWidth="600">
     <Grid>
-            
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.15*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.8*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Row="1" Margin="1,0,10,0" Grid.Column="1">
+            <DataGrid x:Name="dataGridTours" 
+                       Focusable="True"  Margin="43,0,20,32" AutoGenerateColumns="False" Height="153">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Tours"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <DataGrid x:Name="dataGridPlaces" Height="135" Margin="43,0,20,0">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Places"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
+
+        <Border Grid.Column="0" Grid.Row="1"  BorderBrush="LightSkyBlue" BorderThickness="1" Margin="30,0,0,44">
+            <StackPanel Orientation="Vertical" Margin="9,0,0,26">
+                <Expander Margin="5,2.5,5,2.5" Foreground="Black" Header="Add new tour" IsExpanded="True" Height="238">
+                    <StackPanel Height="264">
+                        <ComboBox Name="comboBoxPlaces" Margin="0,5,0,15"/>
+                        <Label x:Name="label" Content="Tour name"/>
+                        <TextBox Name="textBoxName" Margin="0,5,0,5" Height="28"/>
+                        <Label x:Name="label1" Content="Price"/>
+                        <TextBox Name="textBoxTourName" Margin="0,7,0,7" Height="28"/>
+                        <Button x:Name="buttonAdd" Content="Add" HorizontalAlignment="Center" VerticalAlignment="Top"  Width="75" />
+                    </StackPanel>
+                </Expander>
+            </StackPanel>
+        </Border>
+        <Button x:Name="buttonRemove" Content="Remove" HorizontalAlignment="Left" Margin="47,24,0,0" VerticalAlignment="Top" Width="76" Grid.Column="1"/>
+        <ComboBox x:Name="comboBoxFind" Grid.Column="1" HorizontalAlignment="Left" Margin="169,24,0,0" VerticalAlignment="Top" Width="120"/>
+
+
     </Grid>
 </UserControl>

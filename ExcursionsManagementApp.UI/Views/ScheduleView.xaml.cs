@@ -23,8 +23,8 @@ namespace ExcursionsManagementApp.UI.Views
         public ScheduleView()
         {
             InitializeComponent();
-            this.Height = (SystemParameters.PrimaryScreenHeight * 0.75);
-            this.Width = (SystemParameters.PrimaryScreenWidth * 0.75);
+            //this.Height = (SystemParameters.PrimaryScreenHeight * 0.75);
+            //this.Width = (SystemParameters.PrimaryScreenWidth * 0.75);
         }
     }
 }

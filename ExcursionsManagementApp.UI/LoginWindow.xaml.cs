@@ -29,11 +29,10 @@ namespace ExcursionsManagementApp.UI
             byte[] hash = md5.Hash;
 
             StringBuilder password = new StringBuilder();
-            for(int i = 0; i < hash.Length; i++)
+            for (int i = 0; i < hash.Length; i++)
             {
                 password.Append(hash[i].ToString("x2"));
             }
-            //textBoxLogin.Text = password.ToString();
 
             User user = businessLayer.GetUserByLoginAndPassword(login, password.ToString());
 
@@ -44,8 +43,8 @@ namespace ExcursionsManagementApp.UI
             else
             {
                 //CurrentUser.Initialize(user);
-                MainWindow mW = new MainWindow();
-                mW.Show();
+                MainWindow mainWin = new MainWindow();
+                mainWin.Show();
                 this.Close();
             }
         }

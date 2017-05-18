@@ -8,13 +8,19 @@
         xmlns:views="clr-namespace:ExcursionsManagementApp.UI.Views"
         mc:Ignorable="d"
         Title="City tours manager" WindowStartupLocation="CenterScreen" 
-        VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+        Height="500" Width="600" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
 
     <Window.Resources>
-        <DataTemplate x:Name="scheduleViewTemplate" DataType="{x:Type viewmodels:ScheduleViewModel}">
+        <DataTemplate x:Name="scheduleViewTemplate" DataType="{x:Type views:ScheduleView}">
             <views:ScheduleView DataContext="{Binding}"/>
         </DataTemplate>
-        <DataTemplate x:Name="toursViewTemplate" DataType="{x:Type viewmodels:ToursViewModel}">
+        <DataTemplate x:Name="salesViewTemplate" DataType="{x:Type views:SalesView}">
+            <views:ScheduleView DataContext="{Binding}"/>
+        </DataTemplate>
+        <DataTemplate x:Name="guidesViewTemplate" DataType="{x:Type views:GuidesView}">
+            <views:GuidesView DataContext="{Binding}"/>
+        </DataTemplate>
+        <DataTemplate x:Name="toursViewTemplate" DataType="{x:Type views:ToursView}">
             <views:ToursView DataContext="{Binding}"/>
         </DataTemplate>
     </Window.Resources>
@@ -33,8 +39,8 @@
 
         <Button Grid.Column="0" Content="Schedule" Background="Ivory" Click="Schedule_Clicked"/>
         <Button Grid.Column="1" Content="Tours" Background="Ivory" Click="Tours_Clicked"/>
-        <Button Grid.Column="2" Content="Sales" Background="Ivory"/>
-        <Button Grid.Column="3" Content="Guides" Background="Ivory"/>
+        <Button Grid.Column="2" Content="Sales" Background="Ivory" Click="Sales_Clicked"/>
+        <Button Grid.Column="3" Content="Guides" Background="Ivory" Click="Guides_Clicked"/>
 
         <ContentControl Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="4" Content="{Binding}"/>
 

@@ -8,27 +8,27 @@ namespace ExcursionsManagementApp.BL
     {
         IList<ScheduleEntry> GetAllSchedule();
         IList<ScheduleEntry> GetToursOnDay();
-        void AddScheduleEntry();
-        void RemoveScheduleEntry();
+        void AddScheduleEntry(ScheduleEntry shEntry);
+        void RemoveScheduleEntry(ScheduleEntry shEntry);
 
         IList<Tour> GetAllTours();
-        Tour GetTourByName();
-        void AddTour();
-        void RemoveTour();
+        Tour GetTourByName(string tourName);
+        void AddTour(Tour tour);
+        void RemoveTour(Tour tour);
 
         IList<Place> GetAllPlaces();
-        void AddPlace();
-        void RemovePlace();
+        void AddPlace(Place place);
+        void RemovePlace(Place place);
 
         IList<Guide> GetAllGuides();
-        Guide GetGuideByName();
-        void AddGuide();
-        void RemoveGuide();
+        Guide GetGuideByName(string firstName, string lastName);
+        void AddGuide(Guide guide);
+        void RemoveGuide(Guide guide);
 
         IList<Customer> GetAllCustomers();
-        Customer GetCustomerByName();
-        void AddCustomer();
-        void RemoveCustomer();
+        Customer GetCustomerByName(string firsttName, string lastName);
+        void AddCustomer(Customer customer);
+        void RemoveCustomer(Customer customer);
 
         User GetUserByLoginAndPassword(string login, string password);
 

@@ -4,32 +4,46 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ExcursionsManagementApp.UI.Views"
-             mc:Ignorable="d" Height="297.905" Width="553.254" 
-             >
+             mc:Ignorable="d"  
+             d:DesignHeight="500" d:DesignWidth="600">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.3*"/>
+            <RowDefinition Height="0.15*"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="0.8*"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <DatePicker HorizontalAlignment="Left" Margin="98,39,0,0" VerticalAlignment="Top">
+        <DatePicker Name="datFind" HorizontalAlignment="Left" Margin="181,20,0,0" VerticalAlignment="Top" Grid.Column="1">
             <DatePicker.Resources>
                 <Style TargetType="DatePickerTextBox">
                     <Setter Property="Text" Value="View by Date"/>
                 </Style>
             </DatePicker.Resources>
         </DatePicker>
-        <StackPanel Grid.Column="0" Grid.Row="1">
-            <DataGrid x:Name="dataGrid" HorizontalAlignment="Stretch" 
-                      VerticalAlignment="Stretch" Focusable="True" Height="209" Margin="22,0,0,0" AutoGenerateColumns="False">
+        <StackPanel Grid.Row="1" Margin="1,0,10,67" Grid.Column="1">
+            <DataGrid x:Name="dataGrid" 
+                       Focusable="True"  Margin="43,0,20,82" AutoGenerateColumns="False" Height="288">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Excursions"/>
                 </DataGrid.Columns>
             </DataGrid>
         </StackPanel>
+
+        <Border Grid.Column="0" Grid.Row="1"  BorderBrush="LightSkyBlue" BorderThickness="1" Margin="30,0,0,82">
+            <StackPanel Orientation="Vertical" Margin="9,0,0,26">
+                <Expander Margin="5,2.5,5,2.5" Foreground="Black" Header="Add new entry" IsExpanded="True" Height="210">
+                    <StackPanel Height="118">
+                        <ComboBox Name="comboBoxTour" Margin="0,5,0,15"/>
+                        <DatePicker Name="datAdd" Margin="0,5,0,15"/>
+                        <Button x:Name="buttonAdd" Content="Add" HorizontalAlignment="Center" VerticalAlignment="Top" Width="75" />
+                    </StackPanel>
+                </Expander>
+            </StackPanel>
+        </Border>
+        <Button x:Name="buttonRemove" Content="Remove" HorizontalAlignment="Left" Margin="47,24,0,0" VerticalAlignment="Top" Width="76" Grid.Column="1"/>
+
     </Grid>
 </UserControl>
