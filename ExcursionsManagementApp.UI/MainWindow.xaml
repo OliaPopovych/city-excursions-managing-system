@@ -11,16 +11,16 @@
         Height="500" Width="600" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
 
     <Window.Resources>
-        <DataTemplate x:Name="scheduleViewTemplate" DataType="{x:Type views:ScheduleView}">
+        <DataTemplate x:Name="scheduleViewTemplate" DataType="{x:Type viewmodels:ScheduleViewModel}">
             <views:ScheduleView DataContext="{Binding}"/>
         </DataTemplate>
-        <DataTemplate x:Name="salesViewTemplate" DataType="{x:Type views:SalesView}">
+        <DataTemplate x:Name="salesViewTemplate" DataType="{x:Type viewmodels:SalesViewModel}">
             <views:ScheduleView DataContext="{Binding}"/>
         </DataTemplate>
-        <DataTemplate x:Name="guidesViewTemplate" DataType="{x:Type views:GuidesView}">
+        <DataTemplate x:Name="guidesViewTemplate" DataType="{x:Type viewmodels:GuidesViewModel}">
             <views:GuidesView DataContext="{Binding}"/>
         </DataTemplate>
-        <DataTemplate x:Name="toursViewTemplate" DataType="{x:Type views:ToursView}">
+        <DataTemplate x:Name="toursViewTemplate" DataType="{x:Type viewmodels:ToursViewModel}">
             <views:ToursView DataContext="{Binding}"/>
         </DataTemplate>
     </Window.Resources>

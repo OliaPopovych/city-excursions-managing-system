@@ -78,6 +78,7 @@ namespace ExcursionsManagementApp.DAL
             {
                 foreach(var item in items)
                 {
+                    // Maby use attach
                     context.Entry(item).State = EntityState.Added;
                 }
                 context.SaveChanges();

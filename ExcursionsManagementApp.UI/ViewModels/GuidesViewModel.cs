@@ -1,19 +1,20 @@
 ﻿using ExcursionsManagementApp.BL;
 using ExcursionsManagementApp.DomainModel;
+using ExcursionsManagementApp.UI.ViewModels;
 
 namespace ExcursionsManagementApp.UI.ViewModels
 {
-    public class ScheduleViewModel : CommandBase<ScheduleEntry>
+    public class GuidesViewModel : CommandBase<Guide>
     {
         private ExcurDbContext dbContext;
         BusinessLayer businessLayer;
-
-        public ScheduleViewModel()
+        
+        public GuidesViewModel()
         {
             businessLayer = new BusinessLayer();
             dbContext = new ExcurDbContext();
-            var list = businessLayer.GetAllSchedule();
-            foreach (var item in list)
+            var list = businessLayer.GetAllGuides();
+            foreach(var item in list)
             {
                 Collection.Add(item);
             }
@@ -21,16 +22,18 @@ namespace ExcursionsManagementApp.UI.ViewModels
 
         protected override void Get()
         {
-            
+            //var list = businessLayer.AddGuide();
         }
         protected override void Save()
         {
-            
+            Guide guide = new Guide();
+            //guide.FirstName = 
+
+            //var list = businessLayer.AddGuide();
         }
         protected override void Delete()
         {
-           
+            //businessLayer.RemoveGuide();
         }
     }
 }
-

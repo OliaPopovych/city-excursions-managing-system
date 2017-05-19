@@ -71,6 +71,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Views\MyConverter.cs" />
+    <Compile Include="ViewModels\CommandBase.cs" />
+    <Compile Include="ViewModels\CommandHandler.cs" />
+    <Compile Include="ViewModels\GuidesViewModel.cs" />
+    <Compile Include="ViewModels\SalesViewModel.cs" />
     <Compile Include="ViewModels\ScheduleViewModel.cs" />
     <Compile Include="ViewModels\ToursViewModel.cs" />
     <Compile Include="Views\GuidesView.xaml.cs">
@@ -170,6 +175,7 @@
       <Name>ExcursionsManagementApp.DomainModel</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
