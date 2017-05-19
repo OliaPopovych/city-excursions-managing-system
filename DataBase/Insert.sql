@@ -4,7 +4,9 @@
 
 SET IDENTITY_INSERT [dbo].[Guides] ON
 INSERT INTO [dbo].[Guides]([GuideID], [FirstName], [LastName])
-VALUES (1, 'Nathan', 'Malkivic')
+VALUES (1, 'Nathan', 'Malkovic'),
+	   (2, 'Maria', 'Carey'),
+	   (3, 'Johny', 'Depp')
 SET IDENTITY_INSERT [dbo].[Guides] OFF
 
 SET IDENTITY_INSERT [dbo].[Tours] ON

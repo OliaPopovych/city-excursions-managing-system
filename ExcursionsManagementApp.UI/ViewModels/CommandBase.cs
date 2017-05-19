@@ -1,16 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace ExcursionsManagementApp.UI.ViewModels.Base
+namespace ExcursionsManagementApp.UI.ViewModels
 {
     public class CommandBase<T> : INotifyPropertyChanged
     {
+        private ICommand getCommand;
+        private ICommand saveCommand;
+        private ICommand removeCommand;
+        private bool canExecute;
+
         public CommandBase()
         {
              canExecute = true;
@@ -45,12 +46,6 @@ namespace ExcursionsManagementApp.UI.ViewModels.Base
             }
             set { collection = value; OnPropertyChanged("Collection"); }
         }
-
-
-        private ICommand getCommand;
-        private ICommand saveCommand;
-        private ICommand removeCommand;
-        private bool canExecute;
 
         public ICommand GetCommand
         {

@@ -4,9 +4,16 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ExcursionsManagementApp.UI.Views"
+             xmlns:viewmodels="clr-namespace:ExcursionsManagementApp.UI.ViewModels"
              mc:Ignorable="d"  
              d:DesignHeight="500" d:DesignWidth="600">
-    <Grid>
+
+    <UserControl.Resources>
+        <viewmodels:ScheduleViewModel x:Key="scheduleViewModel"/>
+        <local:MyConverter x:Key="MyConverter"/>
+    </UserControl.Resources>
+
+    <Grid DataContext="{StaticResource ResourceKey=scheduleViewModel}">
         <Grid.RowDefinitions>
             <RowDefinition Height="0.15*"/>
             <RowDefinition/>
@@ -24,10 +31,12 @@
             </DatePicker.Resources>
         </DatePicker>
         <StackPanel Grid.Row="1" Margin="1,0,10,67" Grid.Column="1">
-            <DataGrid x:Name="dataGrid" 
+            <DataGrid x:Name="dataGrid" ItemsSource="{Binding Collection}"
                        Focusable="True"  Margin="43,0,20,82" AutoGenerateColumns="False" Height="288">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Excursions"/>
+                    <DataGridTextColumn Header="ID" Binding="{Binding Path=ScheduleEntryID}" Width="50"/>
+                    <DataGridTextColumn Header="Tour Name" Binding="{Binding Path=TourName}" Width="100"/>
+                    <DataGridTextColumn Header="Start Time" Binding="{Binding Path=StartTime}" Width="102"/>
                 </DataGrid.Columns>
             </DataGrid>
         </StackPanel>
