@@ -71,6 +71,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModels\Base\CommandBase.cs" />
+    <Compile Include="ViewModels\Base\CommandHandler.cs" />
+    <Compile Include="ViewModels\GuidesViewModel.cs" />
+    <Compile Include="ViewModels\SalesViewModel.cs" />
     <Compile Include="ViewModels\ScheduleViewModel.cs" />
     <Compile Include="ViewModels\ToursViewModel.cs" />
     <Compile Include="Views\GuidesView.xaml.cs">

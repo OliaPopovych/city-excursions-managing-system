@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ExcursionsManagementApp.DomainModel;
+using ExcursionsManagementApp.UI.ViewModels.Base;
 
 namespace ExcursionsManagementApp.UI.ViewModels
 {
-    class ToursViewModel
+    public class ToursViewModel : CommandBase<ScheduleEntry>
     {
     }
 }
