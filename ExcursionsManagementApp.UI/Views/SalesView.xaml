@@ -21,7 +21,7 @@
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Row="1" Margin="1,0,10,67" Grid.Column="1">
             <DataGrid x:Name="dataGrid" 
-                       Focusable="True"  Margin="43,0,20,82" AutoGenerateColumns="False" Height="288">
+                       Focusable="True"  Margin="43,0,20,82" IsReadOnly="True" AutoGenerateColumns="False" Height="288">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Excursions"/>
                 </DataGrid.Columns>

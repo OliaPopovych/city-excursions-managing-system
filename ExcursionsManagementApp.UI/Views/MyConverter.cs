@@ -8,7 +8,7 @@ namespace ExcursionsManagementApp.UI.Views
     {
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
-            return new Tuple<int, int>((int)values[0], (int)values[1]);
+            return new Tuple<string, string>(values[0].ToString(), values[1].ToString());
         }
 
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)

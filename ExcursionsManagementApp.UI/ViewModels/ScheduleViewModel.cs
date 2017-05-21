@@ -19,15 +19,15 @@ namespace ExcursionsManagementApp.UI.ViewModels
             }
         }
 
-        protected override void Get()
+        protected override void Get(object parameter)
         {
             
         }
-        protected override void Save()
+        protected override void Save(object parameter)
         {
             
         }
-        protected override void Delete()
+        protected override void Delete(object parameter)
         {
            
         }

@@ -51,7 +51,7 @@ namespace ExcursionsManagementApp.UI.ViewModels
         {
             get
             {
-                return getCommand ?? (getCommand = new CommandHandler(() => Get(), canExecute));
+                return getCommand ?? (getCommand = new CommandHandler((parameter) => Get(parameter), canExecute));
             }
         }
 
@@ -59,7 +59,7 @@ namespace ExcursionsManagementApp.UI.ViewModels
         {
             get
             {
-                return saveCommand ?? (saveCommand = new CommandHandler(() => Save(), canExecute));
+                return saveCommand ?? (saveCommand = new CommandHandler((parameter) => Save(parameter), canExecute));
             }
         }
 
@@ -67,19 +67,19 @@ namespace ExcursionsManagementApp.UI.ViewModels
         {
             get
             {
-                return removeCommand ?? (removeCommand = new CommandHandler(() => Delete(), canExecute));
+                return removeCommand ?? (removeCommand = new CommandHandler((parameter) => Delete(parameter), canExecute));
             }
         }
 
-        protected virtual void Get()
+        protected virtual void Get(object parameter)
         {
             throw new NotImplementedException();
         }
-        protected virtual void Save()
+        protected virtual void Save(object parameter)
         {
             throw new NotImplementedException();
         }
-        protected virtual void Delete()
+        protected virtual void Delete(object parameter)
         {
             throw new NotImplementedException();
         }

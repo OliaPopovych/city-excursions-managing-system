@@ -16,7 +16,7 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Row="1" Margin="1,0,10,0" Grid.Column="1">
-            <DataGrid x:Name="dataGridTours" 
+            <DataGrid x:Name="dataGridTours" IsReadOnly="True"
                        Focusable="True"  Margin="43,0,20,32" AutoGenerateColumns="False" Height="153">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Tours"/>

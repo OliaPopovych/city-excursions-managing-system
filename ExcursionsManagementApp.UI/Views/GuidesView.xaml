@@ -12,7 +12,7 @@
         <local:MyConverter x:Key="MyConverter"/>
     </UserControl.Resources>
 
-    <Grid DataContext="{StaticResource ResourceKey=guideViewModel}">
+    <Grid DataContext="{StaticResource ResourceKey=guideViewModel}" d:DataContext="{d:DesignInstance IsDesignTimeCreatable=True}" >
 
         <Grid.RowDefinitions>
             <RowDefinition Height="0.15*"/>
@@ -25,11 +25,11 @@
 
         <StackPanel Grid.Row="1" Margin="1,0,10,67" Grid.Column="1">
             <DataGrid x:Name="dataGrid"  ItemsSource="{Binding Collection}"
-                       Focusable="True"  Margin="43,0,20,82" AutoGenerateColumns="False" Height="288">
+                       Focusable="True"  Margin="43,0,20,82" AutoGenerateColumns="False" Height="288" IsReadOnly="True">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="ID" Binding="{Binding Path=GuideID}" Width="50"/>
-                    <DataGridTextColumn Header="First Name" Binding="{Binding Path=FirstName}" Width="100"/>
-                    <DataGridTextColumn Header="Last Name" Binding="{Binding Path=LastName}" Width="102"/>
+                    <DataGridTextColumn Header="ID" Binding="{Binding Path=GuideID, Mode=TwoWay}" Width="50"/>
+                    <DataGridTextColumn Header="First Name" Binding="{Binding Path=FirstName, Mode=TwoWay}" Width="100"/>
+                    <DataGridTextColumn Header="Last Name" Binding="{Binding Path=LastName, Mode=TwoWay}" Width="102"/>
                 </DataGrid.Columns>
             </DataGrid>
         </StackPanel>
@@ -44,12 +44,12 @@
                         <Label x:Name="label1" Content="Last Name"/>
                         <TextBox x:Name="textBoxFName" Margin="0,5,0,5" Height="28"/>
                         <Button x:Name="buttonAdd" Command="{Binding SaveCommand}"  Content="Add" HorizontalAlignment="Center" VerticalAlignment="Top" Width="75">
-                            <!--<Button.CommandParameter>
+                            <Button.CommandParameter>
                                 <MultiBinding Converter="{StaticResource MyConverter}">
-                                    --><!--<Binding Path="Text" ElementName="textBoxFName"/>
-                                    <Binding Path="Text" ElementName="textBoxSName"/>--><!--
+                                    <Binding Path="Text" ElementName="textBoxFName"/>
+                                    <Binding Path="Text" ElementName="textBoxSName"/>
                                 </MultiBinding>
-                            </Button.CommandParameter>-->
+                            </Button.CommandParameter>
                         </Button>
                     </StackPanel>
                 </Expander>
@@ -58,8 +58,6 @@
         <Button x:Name="buttonRemove"  Command="{Binding DeleteCommand}" Content="Remove" HorizontalAlignment="Left" Margin="47,24,0,0" VerticalAlignment="Top" Width="76" Grid.Column="1"/>
 
         <ComboBox x:Name="comboBoxFind" Grid.Column="1" HorizontalAlignment="Left" Margin="169,24,0,0" VerticalAlignment="Top" Width="120"/>
-
-
 
     </Grid>
 </UserControl>

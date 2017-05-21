@@ -31,7 +31,7 @@
             </DatePicker.Resources>
         </DatePicker>
         <StackPanel Grid.Row="1" Margin="1,0,10,67" Grid.Column="1">
-            <DataGrid x:Name="dataGrid" ItemsSource="{Binding Collection}"
+            <DataGrid x:Name="dataGrid" IsReadOnly="True" ItemsSource="{Binding Collection}"
                        Focusable="True"  Margin="43,0,20,82" AutoGenerateColumns="False" Height="288">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="ID" Binding="{Binding Path=ScheduleEntryID}" Width="50"/>
