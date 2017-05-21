@@ -8,28 +8,7 @@ namespace ExcursionsManagementApp.UI.ViewModels
     public class GuidesViewModel : CommandBase<Guide>
     {
         BusinessLayer businessLayer;
-
-        //#region Guides fields
-
-        //public int GuideID
-        //{
-        //    get { return GuideID; }
-        //    set { GuideID = value; OnPropertyChanged("GuideID"); }
-        //}
-
-        //public string FirstName
-        //{
-        //    get { return FirstName; }
-        //    set { FirstName = value; OnPropertyChanged("FirstName"); }
-        //}
-
-        //public string LastName
-        //{
-        //    get { return LastName; }
-        //    set { LastName = value; OnPropertyChanged("LastName"); }
-        //}
-
-        //#endregion
+        public Guide SelectedGuide { get; set; }
 
         public GuidesViewModel()
         {
@@ -51,15 +30,22 @@ namespace ExcursionsManagementApp.UI.ViewModels
             Guide guide = new Guide();
             guide.FirstName = initials.Item1;
             guide.LastName = initials.Item2;
-            businessLayer.AddGuide(guide);
-            // Changing all the collection of guides which is bad for performance
-            // A way to bypass this is to create a wrapper class for each entity
-            // And change only one property instead of all collection
-            Collection.Add(guide);
+            if(guide.FirstName != string.Empty && guide.LastName != string.Empty)
+            {
+                businessLayer.AddGuide(guide);
+                // Changing all the collection of guides which is bad for performance
+                // A way to bypass this is to create a wrapper class for each entity
+                // And notify changes only for one property instead of all collection
+                Collection.Add(guide);
+            }    
         }
         protected override void Delete(object parameter)
         {
-            //businessLayer.RemoveGuide();
+            if(SelectedGuide != null)
+            {
+                businessLayer.RemoveGuide(SelectedGuide);
+                Collection.Remove(SelectedGuide);
+            }   
         }
     }
 }

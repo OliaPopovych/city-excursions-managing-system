@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
+using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
 
@@ -74,15 +76,34 @@ namespace ExcursionsManagementApp.DAL
 
         public virtual void Add(params T[] items)
         {
-            using(var context = new ExcurDbContext())
-            {
-                foreach(var item in items)
+            try {
+                using (var context = new ExcurDbContext())
                 {
-                    // Maby use attach
-                    context.Entry(item).State = EntityState.Added;
+                    foreach (var item in items)
+                    {
+                        // Maby use attach
+                        context.Entry(item).State = EntityState.Added;
+                    }
+                    context.SaveChanges();
                 }
-                context.SaveChanges();
             }
+            catch (DbEntityValidationException e)
+            {
+                foreach(var eve in e.EntityValidationErrors)
+                {
+                    Debug.WriteLine($@"Entity of type {eve.Entry.Entity.GetType().Name} 
+                                      in state {eve.Entry.State} has the following errors:");
+                    foreach(var ve in eve.ValidationErrors)
+                    {
+                        Debug.WriteLine("- Property: \"{0}\", Value: \"{1}\", Error: \"{2}\"",
+                ve.PropertyName,
+                eve.Entry.CurrentValues.GetValue<object>(ve.PropertyName),
+                ve.ErrorMessage);
+                    }
+                }
+                //throw;
+            }
+            
         }
 
         public virtual void Update(params T[] items)
@@ -93,6 +114,7 @@ namespace ExcursionsManagementApp.DAL
                 {
                     context.Entry(item).State = EntityState.Modified;
                 }
+                context.SaveChanges();
             }
         }
 

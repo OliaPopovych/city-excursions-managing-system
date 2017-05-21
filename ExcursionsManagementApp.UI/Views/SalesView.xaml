@@ -4,13 +4,15 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ExcursionsManagementApp.UI.Views"
+             xmlns:viewmodels="clr-namespace:ExcursionsManagementApp.UI.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="600">
+    <UserControl.Resources>
+        <viewmodels:SalesViewModel x:Key="salesViewModel"/>
+        <viewmodels:ScheduleViewModel x:Key="scheduleViewModel"/>
+    </UserControl.Resources>
 
-
-
-    <Grid>
-
+    <Grid DataContext="{StaticResource ResourceKey=salesViewModel}" d:DataContext="{d:DesignInstance IsDesignTimeCreatable=True}">
         <Grid.RowDefinitions>
             <RowDefinition Height="0.15*"/>
             <RowDefinition/>
@@ -20,10 +22,12 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Row="1" Margin="1,0,10,67" Grid.Column="1">
-            <DataGrid x:Name="dataGrid" 
+            <DataGrid x:Name="dataGrid" ItemsSource="{Binding Collection}"
                        Focusable="True"  Margin="43,0,20,82" IsReadOnly="True" AutoGenerateColumns="False" Height="288">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Excursions"/>
+                    <DataGridTextColumn Header="CustomerID" Binding="{Binding Path=CustomerID}"/>
+                    <DataGridTextColumn Header="First Name" Binding="{Binding Path=FirstName}"/>
+                    <DataGridTextColumn Header="Last Name" Binding="{Binding Path=LastName}"/>
                 </DataGrid.Columns>
             </DataGrid>
         </StackPanel>
@@ -32,7 +36,11 @@
             <StackPanel Orientation="Vertical" Margin="9,0,0,17">
                 <Expander Margin="5,2.5,5,2.5" Foreground="Black" Header="Add new customer" IsExpanded="True" Height="240">
                     <StackPanel Height="241">
-                        <ComboBox Name="comboBoxSchedule" Margin="0,5,0,15"/>
+                        <Label x:Name="label3" Content="Tour" Height="26"/>
+                        <ComboBox Name="comboBoxSchedule" ItemsSource="{Binding Collection,
+                            Source={StaticResource ResourceKey=scheduleViewModel}, UpdateSourceTrigger=PropertyChanged}" 
+                                  DisplayMemberPath="TourName" 
+                                  Margin="0,5,0,15"/>
                         <Label x:Name="label" Content="First Name" Height="26"/>
                         <TextBox Name="textBoxFName" Margin="0,5,0,5" Height="28"/>
                         <Label x:Name="label1" Content="Last Name"/>

@@ -9,7 +9,7 @@
              d:DesignHeight="500" d:DesignWidth="600" >
     <UserControl.Resources>
         <viewmodels:GuidesViewModel x:Key="guideViewModel"/>
-        <local:MyConverter x:Key="MyConverter"/>
+        <local:MultiValueConverter x:Key="MultiValueConverter"/>
     </UserControl.Resources>
 
     <Grid DataContext="{StaticResource ResourceKey=guideViewModel}" d:DataContext="{d:DesignInstance IsDesignTimeCreatable=True}" >
@@ -24,7 +24,7 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel Grid.Row="1" Margin="1,0,10,67" Grid.Column="1">
-            <DataGrid x:Name="dataGrid"  ItemsSource="{Binding Collection}"
+            <DataGrid x:Name="dataGrid"  ItemsSource="{Binding Collection}" SelectedItem="{Binding SelectedGuide, Mode=TwoWay}"
                        Focusable="True"  Margin="43,0,20,82" AutoGenerateColumns="False" Height="288" IsReadOnly="True">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="ID" Binding="{Binding Path=GuideID, Mode=TwoWay}" Width="50"/>
@@ -36,16 +36,17 @@
 
         <Border Grid.Column="0" Grid.Row="1"  BorderBrush="LightSkyBlue" BorderThickness="1" Margin="30,0,0,82">
             <StackPanel Orientation="Vertical" Margin="9,0,0,26">
-                <Expander Margin="5,2.5,5,2.5" Foreground="Black" Header="Add new guide" IsExpanded="True" Height="232">
-                    <StackPanel Height="209">
+                <Expander Margin="5,2.5,5,2.5" Foreground="Black" Header="Add new guide" IsExpanded="True" Height="260">
+                    <StackPanel Height="248">
+                        <Label x:Name="label3" Content="Tour" Height="26"/>
                         <ComboBox Name="comboBoxSchedule" Margin="0,5,0,15"/>
                         <Label x:Name="label" Content="First Name" Height="26"/>
-                        <TextBox x:Name="textBoxSName" Margin="0,7,0,7" Height="28"/>
+                        <TextBox x:Name="textBoxFName" Margin="0,7,0,7" Height="28"/>
                         <Label x:Name="label1" Content="Last Name"/>
-                        <TextBox x:Name="textBoxFName" Margin="0,5,0,5" Height="28"/>
+                        <TextBox x:Name="textBoxSName" Margin="0,5,0,5" Height="28"/>
                         <Button x:Name="buttonAdd" Command="{Binding SaveCommand}"  Content="Add" HorizontalAlignment="Center" VerticalAlignment="Top" Width="75">
                             <Button.CommandParameter>
-                                <MultiBinding Converter="{StaticResource MyConverter}">
+                                <MultiBinding Converter="{StaticResource MultiValueConverter}">
                                     <Binding Path="Text" ElementName="textBoxFName"/>
                                     <Binding Path="Text" ElementName="textBoxSName"/>
                                 </MultiBinding>
