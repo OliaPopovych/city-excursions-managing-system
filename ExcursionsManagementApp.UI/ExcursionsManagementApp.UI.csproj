@@ -71,6 +71,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModels\CollectionExtensionMethods.cs" />
+    <Compile Include="ViewModels\PlacesViewModel.cs" />
     <Compile Include="Views\MultiValueConverter.cs" />
     <Compile Include="ViewModels\CommandBase.cs" />
     <Compile Include="ViewModels\CommandHandler.cs" />

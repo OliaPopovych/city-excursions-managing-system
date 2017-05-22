@@ -10,6 +10,7 @@
     <UserControl.Resources>
         <viewmodels:SalesViewModel x:Key="salesViewModel"/>
         <viewmodels:ScheduleViewModel x:Key="scheduleViewModel"/>
+        <local:MultiValueConverter x:Key="MultiValueConverter"/>
     </UserControl.Resources>
 
     <Grid DataContext="{StaticResource ResourceKey=salesViewModel}" d:DataContext="{d:DesignInstance IsDesignTimeCreatable=True}">
@@ -22,35 +23,58 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Row="1" Margin="1,0,10,67" Grid.Column="1">
-            <DataGrid x:Name="dataGrid" ItemsSource="{Binding Collection}"
+            <DataGrid x:Name="dataGrid" ItemsSource="{Binding Collection, Mode=TwoWay}" SelectedItem="{Binding SelectedDatagridItem}"
                        Focusable="True"  Margin="43,0,20,82" IsReadOnly="True" AutoGenerateColumns="False" Height="288">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="CustomerID" Binding="{Binding Path=CustomerID}"/>
                     <DataGridTextColumn Header="First Name" Binding="{Binding Path=FirstName}"/>
                     <DataGridTextColumn Header="Last Name" Binding="{Binding Path=LastName}"/>
+                    <DataGridTextColumn Header="Tour" 
+                                        Binding="{Binding Path=ScheduleEntryID}"/>
                 </DataGrid.Columns>
             </DataGrid>
         </StackPanel>
 
         <Border Grid.Column="0" Grid.Row="1"  BorderBrush="LightSkyBlue" BorderThickness="1" Margin="30,0,0,82">
             <StackPanel Orientation="Vertical" Margin="9,0,0,17">
-                <Expander Margin="5,2.5,5,2.5" Foreground="Black" Header="Add new customer" IsExpanded="True" Height="240">
+                <Expander Margin="5,2.5,5,2.5" Foreground="Black" Header="Add new customer" IsExpanded="True" Height="258">
                     <StackPanel Height="241">
                         <Label x:Name="label3" Content="Tour" Height="26"/>
-                        <ComboBox Name="comboBoxSchedule" ItemsSource="{Binding Collection,
-                            Source={StaticResource ResourceKey=scheduleViewModel}, UpdateSourceTrigger=PropertyChanged}" 
-                                  DisplayMemberPath="TourName" 
-                                  Margin="0,5,0,15"/>
+                        <ComboBox Name="comboBoxSchedule" ItemsSource="{Binding Collection, Mode=TwoWay,
+                            Source={StaticResource ResourceKey=scheduleViewModel}, UpdateSourceTrigger=PropertyChanged}"  
+                                  SelectedItem="{Binding SelectedShEntry}"
+                                  Margin="0,5,0,15">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Name="textBox2">
+                                        <TextBlock.Text>
+                                            <MultiBinding StringFormat="{}{0} {1} {2}">
+                                                <Binding Path="ScheduleEntryID"/>
+                                                <Binding Path="TourName"/>
+                                                <Binding Path="StartTime"/>
+                                            </MultiBinding>
+                                        </TextBlock.Text>
+                                    </TextBlock>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
                         <Label x:Name="label" Content="First Name" Height="26"/>
                         <TextBox Name="textBoxFName" Margin="0,5,0,5" Height="28"/>
                         <Label x:Name="label1" Content="Last Name"/>
                         <TextBox Name="textBoxSName" Margin="0,7,0,7" Height="28"/>
-                        <Button x:Name="buttonAdd" Content="Add" HorizontalAlignment="Center" VerticalAlignment="Top" Width="75" />
+                        <Button x:Name="buttonAdd" Command="{Binding SaveCommand}" Content="Add" HorizontalAlignment="Center" VerticalAlignment="Top" Width="75" >
+                            <Button.CommandParameter>
+                                <MultiBinding Converter="{StaticResource MultiValueConverter}">
+                                    <Binding Path="Text" ElementName="textBoxFName"/>
+                                    <Binding Path="Text" ElementName="textBoxSName"/>
+                                </MultiBinding>
+                            </Button.CommandParameter>
+                        </Button>
                     </StackPanel>
                 </Expander>
             </StackPanel>
         </Border>
-        <Button x:Name="buttonRemove" Content="Remove" HorizontalAlignment="Left" Margin="47,24,0,0" VerticalAlignment="Top" Width="76" Grid.Column="1"/>
+        <Button x:Name="buttonRemove" Command="{Binding DeleteCommand}" Content="Remove" HorizontalAlignment="Left" Margin="47,24,0,0" VerticalAlignment="Top" Width="76" Grid.Column="1"/>
         <ComboBox x:Name="comboBoxFind" Grid.Column="1" HorizontalAlignment="Left" Margin="169,24,0,0" VerticalAlignment="Top" Width="120"/>
 
 

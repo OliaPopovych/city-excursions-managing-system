@@ -5,15 +5,17 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ExcursionsManagementApp.UI.Views"
              xmlns:viewmodels="clr-namespace:ExcursionsManagementApp.UI.ViewModels"
-             mc:Ignorable="d" 
-             d:DesignHeight="500" d:DesignWidth="600">
+             mc:Ignorable="d" d:DesignWidth="600" Height="539">
     <UserControl.Resources>
         <viewmodels:ToursViewModel x:Key="toursViewModel"/>
+        <viewmodels:PlacesViewModel x:Key="placesViewModel"/>
+        <viewmodels:GuidesViewModel x:Key="guidesViewModel"/>
+        <local:MultiValueConverter x:Key="MultiValueConverter"/>
     </UserControl.Resources>
-    
+
     <Grid DataContext="{StaticResource ResourceKey=toursViewModel}" d:DataContext="{d:DesignInstance IsDesignTimeCreatable=True}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.15*"/>
+            <RowDefinition Height="0.1*"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -21,8 +23,8 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Row="1" Margin="1,0,10,0" Grid.Column="1">
-            <DataGrid x:Name="dataGridTours" IsReadOnly="True" ItemsSource="{Binding Collection}"
-                       Focusable="True"  Margin="43,0,20,32" AutoGenerateColumns="False" Height="153">
+            <DataGrid x:Name="dataGridTours" ItemsSource="{Binding Collection}" SelectedItem="{Binding SelectedDatagridItem}"
+                       Focusable="True" IsReadOnly="True" Margin="43,0,20,32" AutoGenerateColumns="False" Height="429">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="ToursID" Binding="{Binding Path=TourID}"/>
                     <DataGridTextColumn Header="Tour Name" Binding="{Binding Path=TourName}"/>
@@ -30,29 +32,47 @@
                     <DataGridTextColumn Header="GuideID" Binding="{Binding Path=GuideID}"/>
                 </DataGrid.Columns>
             </DataGrid>
-            <DataGrid x:Name="dataGridPlaces" Height="135" Margin="43,0,20,0">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Places"/>
-                </DataGrid.Columns>
-            </DataGrid>
-        </StackPanel>
 
-        <Border Grid.Column="0" Grid.Row="1"  BorderBrush="LightSkyBlue" BorderThickness="1" Margin="30,0,0,44">
-            <StackPanel Orientation="Vertical" Margin="9,0,0,26">
-                <Expander Margin="5,2.5,5,2.5" Foreground="Black" Header="Add new tour" IsExpanded="True" Height="238">
-                    <StackPanel Height="264">
-                        <ComboBox Name="comboBoxPlaces" Margin="0,5,0,15"/>
-                        <Label x:Name="label" Content="Tour name"/>
+        </StackPanel>
+        <!--Why adding Source to ItemSource triggers null exception for key parameter? But app works fine. -->
+        <!--ItemsSource="{Binding Collection, Source={StaticResource ResourceKey=placesViewModel}}-->
+        <Border Grid.Column="0" Grid.Row="1"  BorderBrush="LightSkyBlue" BorderThickness="1" Margin="30,0,0,-13">
+            <StackPanel Orientation="Vertical" Margin="9,0,0,9">
+                <Expander Margin="5,2.5,5,2.5" Foreground="Black" Header="Add new tour" IsExpanded="True" Height="463">
+                    <StackPanel Height="442">
+                        <Label x:Name="label2" Content="Select Places" RenderTransformOrigin="0.327,-13.596"/>
+                        <DataGrid x:Name="dataGridPlaces" SelectionMode="Extended" SelectedItem="{Binding SelectedPlaces}"
+                                  
+                                  Height="135" Margin="10,0" AutoGenerateColumns="False" IsReadOnly="True">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="PlaceID" Binding="{Binding Path=PlaceID}"/>
+                                <DataGridTextColumn Header="Place Name" Binding="{Binding Path=PlaceName}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <TextBox Name="textBoxAddPlace" Margin="0,5,0,5" Height="28"/>
+                        <Button x:Name="buttonAddPlace" Command="{Binding SaveCommand, Source={StaticResource ResourceKey=placesViewModel}}"
+                                CommandParameter="{Binding Path=Text, ElementName=textBoxAddPlace}" Content="Add Place" Width="75"/>
+                        <Label x:Name="TourName" Content="Tour Name"/>
                         <TextBox Name="textBoxName" Margin="0,5,0,5" Height="28"/>
                         <Label x:Name="label1" Content="Price"/>
-                        <TextBox Name="textBoxTourName" Margin="0,7,0,7" Height="28"/>
-                        <Button x:Name="buttonAdd" Content="Add" HorizontalAlignment="Center" VerticalAlignment="Top"  Width="75" />
+                        <TextBox Name="textBoxPrice" Margin="0,7,0,7" Height="28"/>
+                        <Label x:Name="label3" Content="GuideID"/>
+                        <ComboBox ItemsSource="{Binding Collection, Source={StaticResource ResourceKey=guidesViewModel}}" DisplayMemberPath="GuideID" SelectedItem="{Binding SelectedGuide, Mode=OneWayToSource}" Margin="0,0,0,9"/>
+                        <Button x:Name="buttonAdd" DataContext="{StaticResource ResourceKey=toursViewModel}" Command="{Binding SaveCommand}" Content="Add" HorizontalAlignment="Center" VerticalAlignment="Top"  Width="75">
+                            <Button.CommandParameter>
+                                <MultiBinding Converter="{StaticResource ResourceKey=MultiValueConverter}">
+                                    <Binding Path="Text" ElementName="textBoxName"/>
+                                    <Binding Path="Text" ElementName="textBoxPrice"/>
+                                </MultiBinding>
+                            </Button.CommandParameter>
+                        </Button>
                     </StackPanel>
                 </Expander>
+
             </StackPanel>
         </Border>
-        <Button x:Name="buttonRemove" Content="Remove" HorizontalAlignment="Left" Margin="47,24,0,0" VerticalAlignment="Top" Width="76" Grid.Column="1"/>
-        <ComboBox x:Name="comboBoxFind" Grid.Column="1" HorizontalAlignment="Left" Margin="169,24,0,0" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="buttonRemove" Command="{Binding DeleteCommand}" Content="Remove" HorizontalAlignment="Left" Margin="45,0,0,0" VerticalAlignment="Top" Width="76" Grid.Column="1"/>
+        <ComboBox x:Name="comboBoxFind" Grid.Column="1" HorizontalAlignment="Left" Margin="173,0,0,0" VerticalAlignment="Top" Width="120"/>
 
 
     </Grid>

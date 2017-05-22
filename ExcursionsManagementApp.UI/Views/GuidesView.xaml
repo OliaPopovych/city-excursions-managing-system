@@ -9,6 +9,7 @@
              d:DesignHeight="500" d:DesignWidth="600" >
     <UserControl.Resources>
         <viewmodels:GuidesViewModel x:Key="guideViewModel"/>
+        <viewmodels:ToursViewModel x:Key="toursViewModel"/>
         <local:MultiValueConverter x:Key="MultiValueConverter"/>
     </UserControl.Resources>
 
@@ -24,7 +25,7 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel Grid.Row="1" Margin="1,0,10,67" Grid.Column="1">
-            <DataGrid x:Name="dataGrid"  ItemsSource="{Binding Collection}" SelectedItem="{Binding SelectedGuide, Mode=TwoWay}"
+            <DataGrid x:Name="dataGrid"  ItemsSource="{Binding Collection}" SelectedItem="{Binding SelectedDatagridItem, Mode=TwoWay}"
                        Focusable="True"  Margin="43,0,20,82" AutoGenerateColumns="False" Height="288" IsReadOnly="True">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="ID" Binding="{Binding Path=GuideID, Mode=TwoWay}" Width="50"/>
@@ -39,7 +40,8 @@
                 <Expander Margin="5,2.5,5,2.5" Foreground="Black" Header="Add new guide" IsExpanded="True" Height="260">
                     <StackPanel Height="248">
                         <Label x:Name="label3" Content="Tour" Height="26"/>
-                        <ComboBox Name="comboBoxSchedule" Margin="0,5,0,15"/>
+                        <ComboBox Name="comboBoxSchedule" ItemsSource="{Binding Collection, Source={StaticResource ResourceKey=toursViewModel}, Mode=OneWay}"
+                                  DisplayMemberPath="TourName" SelectedItem="{Binding SelectedTour, Mode=OneWayToSource}" Margin="0,5,0,15"/>
                         <Label x:Name="label" Content="First Name" Height="26"/>
                         <TextBox x:Name="textBoxFName" Margin="0,7,0,7" Height="28"/>
                         <Label x:Name="label1" Content="Last Name"/>

@@ -8,7 +8,7 @@ namespace ExcursionsManagementApp.UI.ViewModels
     public class GuidesViewModel : CommandBase<Guide>
     {
         BusinessLayer businessLayer;
-        public Guide SelectedGuide { get; set; }
+        public Guide SelectedDatagridItem { get; set; }
 
         public GuidesViewModel()
         {
@@ -19,7 +19,7 @@ namespace ExcursionsManagementApp.UI.ViewModels
                 Collection.Add(item);
             }
         }
-
+        #region CommandBase overriden methods
         protected override void Get(object parameter)
         {
             //var list = businessLayer.AddGuide();
@@ -41,11 +41,12 @@ namespace ExcursionsManagementApp.UI.ViewModels
         }
         protected override void Delete(object parameter)
         {
-            if(SelectedGuide != null)
+            if(SelectedDatagridItem != null)
             {
-                businessLayer.RemoveGuide(SelectedGuide);
-                Collection.Remove(SelectedGuide);
+                businessLayer.RemoveGuide(SelectedDatagridItem);
+                Collection.Remove(SelectedDatagridItem);
             }   
         }
+        #endregion
     }
 }

@@ -14,6 +14,7 @@ namespace ExcursionsManagementApp.DomainModel
         }
 
         // PK
+        [Key]
         public int ScheduleEntryID { get; set; }
 
         [StringLength(50)]

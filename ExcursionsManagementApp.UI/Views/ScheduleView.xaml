@@ -11,7 +11,7 @@
     <UserControl.Resources>
         <viewmodels:ScheduleViewModel x:Key="scheduleViewModel"/>
         <viewmodels:ToursViewModel x:Key="toursViewModel"/>
-        <local:MultiValueConverter x:Key="MultiValueConverter"/>
+        <!--<local:MultiValueConverter x:Key="MultiValueConverter"/>-->
     </UserControl.Resources>
 
     <Grid DataContext="{StaticResource ResourceKey=scheduleViewModel}" d:DataContext="{d:DesignInstance IsDesignTimeCreatable=True}">
@@ -32,7 +32,7 @@
             </DatePicker.Resources>
         </DatePicker>
         <StackPanel Grid.Row="1" Margin="1,0,10,67" Grid.Column="1">
-            <DataGrid x:Name="dataGrid" IsReadOnly="True" ItemsSource="{Binding Collection}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+            <DataGrid x:Name="dataGrid" IsReadOnly="True" ItemsSource="{Binding Collection}" SelectedItem="{Binding SelectedDatagridItem, Mode=OneWayToSource}"
                        Focusable="True"  Margin="43,0,20,82" AutoGenerateColumns="False" Height="288">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="ID" Binding="{Binding Path=ScheduleEntryID}" Width="50"/>
@@ -47,17 +47,12 @@
                 <Expander Margin="5,2.5,5,2.5" Foreground="Black" Header="Add new entry" IsExpanded="True" Height="210">
                     <StackPanel Height="166">
                         <Label x:Name="label" Content="Tour" Height="26"/>
-                        <ComboBox Name="comboBoxTour" Margin="0,5,0,15" ItemsSource="{Binding Collection, Source={StaticResource ResourceKey=toursViewModel}, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="TourName" />
+                        <!--, UpdateSourceTrigger=PropertyChanged-->
+                        <ComboBox Name="comboBoxTour" Margin="0,5,0,15" ItemsSource="{Binding Collection, Source={StaticResource ResourceKey=toursViewModel}, Mode=OneWay}"
+                                  DisplayMemberPath="TourName" SelectedItem="{Binding Path=SelectedTour, Mode=OneWayToSource}"/>
                         <!--SelectedValuePath="{Binding Path= toursViewModel.TourName, UpdateSourceTrigger=PropertyChanged}"-->
-                        <DatePicker Name="datAdd" Margin="0,5,0,15"/>
-                        <Button x:Name="buttonAdd" DataContext="{StaticResource ResourceKey=scheduleViewModel}" Command="{Binding SaveCommand}" Content="Add" HorizontalAlignment="Center" VerticalAlignment="Top" Width="75">
-                            <Button.CommandParameter>
-                                <MultiBinding Converter="{StaticResource MultiValueConverter}" >
-                                    <Binding Path="SelectedText" ElementName="comboBoxTour"/>
-                                    <Binding Path="SelectedDate" ElementName="datAdd"/>
-                                </MultiBinding>
-                            </Button.CommandParameter>
-                        </Button> 
+                        <DatePicker Name="datAdd" Margin="0,5,0,15" SelectedDate="{Binding Path=SelectedDate, Mode=OneWayToSource}"/>
+                        <Button x:Name="buttonAdd"  Command="{Binding SaveCommand}" Content="Add" HorizontalAlignment="Center" VerticalAlignment="Top" Width="75"/>
                     </StackPanel>
                 </Expander>
             </StackPanel>

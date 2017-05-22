@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Validation;
 using System.Diagnostics;
 using System.Linq;
@@ -87,20 +88,21 @@ namespace ExcursionsManagementApp.DAL
                     context.SaveChanges();
                 }
             }
-            catch (DbEntityValidationException e)
+            catch (DbUpdateException e)
             {
-                foreach(var eve in e.EntityValidationErrors)
-                {
-                    Debug.WriteLine($@"Entity of type {eve.Entry.Entity.GetType().Name} 
-                                      in state {eve.Entry.State} has the following errors:");
-                    foreach(var ve in eve.ValidationErrors)
-                    {
-                        Debug.WriteLine("- Property: \"{0}\", Value: \"{1}\", Error: \"{2}\"",
-                ve.PropertyName,
-                eve.Entry.CurrentValues.GetValue<object>(ve.PropertyName),
-                ve.ErrorMessage);
-                    }
-                }
+                Debug.WriteLine(e.InnerException.Message);
+                //foreach(var eve in e.EntityValidationErrors)
+                //{
+                //    Debug.WriteLine($@"Entity of type {eve.Entry.Entity.GetType().Name} 
+                //                      in state {eve.Entry.State} has the following errors:");
+                //    foreach(var ve in eve.ValidationErrors)
+                //    {
+                //        Debug.WriteLine("- Property: \"{0}\", Value: \"{1}\", Error: \"{2}\"",
+                //ve.PropertyName,
+                //eve.Entry.CurrentValues.GetValue<object>(ve.PropertyName),
+                //ve.ErrorMessage);
+                //    }
+                //}
                 //throw;
             }
             

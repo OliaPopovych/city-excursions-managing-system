@@ -6,7 +6,15 @@ namespace ExcursionsManagementApp.UI.ViewModels
 {
     public class ScheduleViewModel : CommandBase<ScheduleEntry>
     {
-        public ScheduleEntry SelectedItem { get; set; }
+        public ScheduleEntry SelectedDatagridItem { get; set; }
+        public Tour SelectedTour { get; set; }
+        public DateTime SelectedDate { get; set; }
+
+        // if item in collection here will be removed
+        // than we remove it from other collections
+        // Pass id of remowed scheduleEntry
+        public static Action<int> rowRemoved;
+
         BusinessLayer businessLayer;
 
         public ScheduleViewModel()
@@ -17,19 +25,22 @@ namespace ExcursionsManagementApp.UI.ViewModels
             {
                 Collection.Add(item);
             }
+
+            ToursViewModel.tourRemoved += TourRemoved;
         }
 
+        #region CommandBase overriden methods
         protected override void Get(object parameter)
         {
             
         }
         protected override void Save(object parameter)
         {
-            var parameters = parameter as Tuple<string, string>;
             ScheduleEntry shEntry = new ScheduleEntry();
-            shEntry.TourName = parameters.Item1;
-            shEntry.StartTime = Convert.ToDateTime(parameters.Item2);
-            shEntry.TourID = 1;
+            shEntry.TourName = SelectedTour.TourName;
+            shEntry.StartTime = SelectedDate;
+            //shEntry.Tour = SelectedTour; this row makes new Tour in database
+            shEntry.TourID = SelectedTour.TourID;
 
             if(shEntry.TourName != string.Empty && shEntry.StartTime != null)
             {
@@ -39,11 +50,24 @@ namespace ExcursionsManagementApp.UI.ViewModels
         }
         protected override void Delete(object parameter)
         {
-            if(SelectedItem != null)
+            if(SelectedDatagridItem != null)
             {
-                businessLayer.RemoveScheduleEntry(SelectedItem);
-                Collection.Remove(SelectedItem);
+                OnRowRemoved(SelectedDatagridItem.ScheduleEntryID);
+                businessLayer.RemoveScheduleEntry(SelectedDatagridItem);
+                Collection.Remove(SelectedDatagridItem);     
             }         
+        }
+        #endregion
+
+        public void OnRowRemoved(int id)
+        {
+            rowRemoved?.Invoke(id);
+        }
+
+        public void TourRemoved(int id)
+        {
+            OnRowRemoved(id);
+            Collection.RemoveAll(s => s.TourID == id);
         }
     }
 }
