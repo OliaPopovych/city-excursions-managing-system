@@ -14,8 +14,9 @@ namespace ExcursionsManagementApp.DomainModel
             //    Configuration.LazyLoadingEnabled = false;
             //    Configuration.ProxyCreationEnabled = false;
            // var context = new ExcurDbContext("ExcursionsDB");
-            Database.SetInitializer<ExcurDbContext>(new DBInitializer());
-           // context.Database.Initialize(true);
+           // Database.SetInitializer<ExcurDbContext>(new DBInitializer());
+           // Database.SetInitializer<ExcurDbContext>(new System.Data.Entity.CreateDatabaseIfNotExists<ExcurDbContext>());
+            // context.Database.Initialize(true);
         }
 
         public virtual DbSet<Customer> Customers { get; set; }

@@ -3,7 +3,7 @@ using System.Data.Entity;
 
 namespace ExcursionsManagementApp.DomainModel.Context
 {
-    public class DBInitializer : DropCreateDatabaseAlways<ExcurDbContext>
+    public class DBInitializer : DropCreateDatabaseIfModelChanges<ExcurDbContext>
     {
         protected override void Seed(ExcurDbContext context)
         {          

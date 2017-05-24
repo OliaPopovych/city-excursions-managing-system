@@ -39,7 +39,7 @@
             <StackPanel Orientation="Vertical" Margin="9,0,0,17">
                 <Expander Margin="5,2.5,5,2.5" Foreground="Black" Header="Add new customer" IsExpanded="True" Height="258">
                     <StackPanel Height="241">
-                        <Label x:Name="label3" Content="Tour" Height="26"/>
+                        <Label x:Name="label3" Content="Schedule Entry" Height="26"/>
                         <ComboBox Name="comboBoxSchedule" ItemsSource="{Binding Collection, Mode=TwoWay,
                             Source={StaticResource ResourceKey=scheduleViewModel}, UpdateSourceTrigger=PropertyChanged}"  
                                   SelectedItem="{Binding SelectedShEntry}"

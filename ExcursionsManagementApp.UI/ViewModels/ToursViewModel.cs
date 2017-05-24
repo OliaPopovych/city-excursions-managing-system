@@ -38,12 +38,13 @@ namespace ExcursionsManagementApp.UI.ViewModels
             tour.Price = int.Parse(info.Item2);
             tour.GuideID = SelectedGuide.GuideID;
 
-            foreach (var place in SelectedPlaces)
-            {
-                tour.Places.Add(place);
+            if(SelectedPlaces != null){
+                foreach (var place in SelectedPlaces)
+                {
+                    tour.Places.Add(place);
+                }
             }
-
-            if(tour.TourName != string.Empty)
+            if (tour.TourName != string.Empty)
             {
                 businessLayer.AddTour(tour);
                 Collection.Add(tour);
